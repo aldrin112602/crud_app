@@ -24,7 +24,12 @@
                 <input name="confirm_password" type="password" class="form-control" id="Confirm_password" required>
             </div>
 
-            <button type="submit" class="btn btn-primary px-5">Signup</button>
+            <button type="submit" class="btn btn-outline-dark d-block mt-4 col-lg-3 col-12 mx-auto">Signup</button>
+            <hr>
+            <p class="text-center fs-5">
+                Already have an account? <br>
+            <a href="/login" class="btn btn-outline-primary d-block mt-2 col-lg-2 col-12 mx-auto">Login</a>
+            </p>
         </div>
     </form>
 </div>
