@@ -16,15 +16,29 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse  justify-content-end mt-lg-0 mt-5" id="navbarSupportedContent">
-                <ul class="navbar-nav  mb-2 mb-lg-0">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    @guest
                     <li class="nav-item">
-                        <a class="nav-link bg-dark text-white mx-2 rounded py-1 px-3 fs-6 active" aria-current="page" href="/login">Login</a>
+                        <a class="nav-link bg-dark border text-white mx-2 rounded py-1 px-3 fs-6 active" aria-current="page" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link bg-success text-white mx-2 rounded py-1 px-3 fs-6" href="/signup">Signup</a>
                     </li>
+                    @endguest
+
+                    @auth
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); if(confirm('Are you sure to logout?')) { document.getElementById('logout-form').submit(); }">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                    @endauth
                 </ul>
-                
+
             </div>
         </div>
     </nav>
