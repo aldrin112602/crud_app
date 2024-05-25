@@ -4,6 +4,13 @@
 
 @section('content')
 <div class="p-5">
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
+    <div class="d-flex align-items-center justify-content-end"><a href="" class="btn btn-success">Add + </a></div>
     <table class="table table-striped table-hover">
         <thead>
             <tr>

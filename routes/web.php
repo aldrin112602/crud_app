@@ -16,7 +16,8 @@ Route::get('/dashboard', [PageController::class, 'dashboard']);
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/dashboard', [UsersController::class, 'destroy'])->name('users.destroy');
-    Route::get('/user/{user}/edit', [UsersController::class, 'edit'])->name('users.edit');
+    Route::get('/user/edit/{id}', [UsersController::class, 'edit'])->name('users.edit');
+    Route::put('/user/edit/{user}', [UsersController::class, 'update'])->name('edit.submit');
    
 });
 
