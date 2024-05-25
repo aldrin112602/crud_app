@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -38,7 +39,8 @@ class PageController extends Controller
             return redirect('/');
         }
 
-        return view('dashboard');
+        $users = DB::table('users')->get();
+        return view('dashboard', ['users' => $users]);
     }
 
     
