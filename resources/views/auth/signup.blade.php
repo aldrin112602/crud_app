@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="p-5">
+    
     <form action="{{ route('signup.submit') }}" method="POST" class="mx-auto col-lg-6 col bg-light border rounded shadow" style="overflow: hidden;">
         @csrf
         <h4 class="bg-primary p-4 text-white">Signup</h4>
@@ -11,6 +12,15 @@
         @error('error')
             <div class="alert alert-danger p-2 mt-2">{{ $message }}</div>
         @enderror
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="mt-1">
                 <label for="name" class="form-label my-0">Full name</label>
                 <input value="{{ old('name') }}" name="name" type="name" class="form-control" id="name" required>

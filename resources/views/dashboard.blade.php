@@ -4,13 +4,21 @@
 
 @section('content')
 <div class="p-5">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @if (session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
         </div>
     @endif
-
-    <div class="d-flex align-items-center justify-content-end"><a href="" class="btn btn-success">Add + </a></div>
+    <div class="d-flex align-items-center justify-content-end"><a href="{{ route('addUserPage') }}" class="btn btn-success">Add + </a></div>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -30,11 +38,11 @@
                 <td>{{ $user->name }}</td>
                 <td>
                     <div class="d-flex gap-2">
-                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
                         <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
                         </form>
                     </div>
                 </td>

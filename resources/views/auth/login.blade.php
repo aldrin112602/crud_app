@@ -4,6 +4,15 @@
 
 @section('content')
 <div class="p-5">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="{{ route('login.submit') }}" class="mx-auto col-lg-6 col bg-light border rounded shadow" style="overflow: hidden;">
         @csrf
         <h4 class="bg-primary p-4 text-white">Login</h4>

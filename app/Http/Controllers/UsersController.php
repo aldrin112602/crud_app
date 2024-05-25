@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 class UsersController extends Controller
 {
     //
-    public function destroy()
-    {
+    public function destroy(User $user) {
+        $user->delete();
+        return redirect('/dashboard')->with('message', 'User deleted successfully.');
     }
 
 
@@ -20,7 +22,8 @@ class UsersController extends Controller
     }
 
 
-    public function update(Request $request, User $user) {
+    public function update(Request $request, User $user)
+    {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -36,5 +39,27 @@ class UsersController extends Controller
         $user->save();
 
         return redirect('/dashboard')->with('message', 'User updated successfully');
+    }
+
+    public function addUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect('/dashboard')->with('message', 'User added successfully');
+    }
+
+    public function addUserPage()
+    {
+        return view('users.add');
     }
 }
